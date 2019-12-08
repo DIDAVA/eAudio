@@ -22,5 +22,3 @@ This project is supposed to keep standard html audio object and add missing feat
 
 ## EQ
 `eAudio` comes with 10 band equalizer. The frequency bands are adjusted on standard harmonic octaves (`31Hz`, `63Hz`, `125Hz`, `250Hz`, `500Hz`, `1kHz`, `2kHz`, `4kHz`, `8kHz`, `16kHz`). The gain for each band is limited between `+6db` and `-12db` to prevent output distortion and band converage.
-
-To access equalizer
