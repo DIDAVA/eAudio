@@ -22,16 +22,16 @@ This project is supposed to keep standard html audio object and add missing feat
 ```
 
 ## EQ
-`eAudio` comes with 10 band equalizer. The frequency bands are adjusted on standard harmonic octaves (`31Hz`, `63Hz`, `125Hz`, `250Hz`, `500Hz`, `1kHz`, `2kHz`, `4kHz`, `8kHz`, `16kHz`). The gain for each band is limited between `+6db` and `-12db` to prevent output distortion and band converage. The default gain value for each band is `0`.
+`eAudio` comes with 10 band equalizer. The frequency bands are adjusted on standard harmonic octaves (`31Hz`, `63Hz`, `125Hz`, `250Hz`, `500Hz`, `1kHz`, `2kHz`, `4kHz`, `8kHz`, `16kHz`). The gain for each band is limited between `+6db` and `-24db` to prevent output distortion and band converage. The default gain value for each band is `0`.
 ```javascript
-audio.eq.31 = 0;
-audio.eq.63 = 0;
-audio.eq.125 = 0;
-audio.eq.250 = 0;
-audio.eq.500 = 0;
-audio.eq.1000 = 0;
-audio.eq.2000 = 0;
-audio.eq.4000 = 0;
-audio.eq.8000 = 0;
-audio.eq.16000 = 0;
+audio.eq[31] = 0;
+audio.eq[63] = 0;
+audio.eq[125] = 0;
+audio.eq[250] = 0;
+audio.eq[500] = 0;
+audio.eq[1000] = 0;
+audio.eq[2000] = 0;
+audio.eq[4000] = 0;
+audio.eq[8000] = 0;
+audio.eq[16000] = 0;
 ```

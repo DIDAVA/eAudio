@@ -30,7 +30,7 @@ class eAudio extends Audio {
         get(){ return filter.gain.value },
         set(value){
           if (value > 6) value = 6;
-          else if (value < -12) value = -12;
+          else if (value < -24) value = -24;
           filter.gain.value = value;
         }
       });
