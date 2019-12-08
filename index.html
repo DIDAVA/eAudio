@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container"></div>
+</body>
+<script src="js/eAudio.js"></script>
+<script>
+  const audio = new eAudio('http://45.32.3.178:8232/stream/1');
+  audio.crossOrigin = '*';
+  audio.controls = true;
+  document.querySelector('#container').appendChild(audio);
+</script>
+</html>
