@@ -57,11 +57,11 @@ class eAudio extends Audio {
     });
 
     eAudio.prototype.fadein = function(time = 3){
-      fader.gain.exponentialRampToValueAtTime(1, actx.currentTime + time)
+      fader.gain.linearRampToValueAtTime(1, actx.currentTime + time)
     }
 
     eAudio.prototype.fadeout = function(time = 3){
-      fader.gain.exponentialRampToValueAtTime(0.000001, actx.currentTime + time)
+      fader.gain.linearRampToValueAtTime(0.000001, actx.currentTime + time)
     }
 
     this.src = src;

@@ -37,11 +37,10 @@ audio.eq[16000] = 0;
 ```
 
 ## FadeIn / FadeOut
-Both fadein and fadeout are separated methods on the `eAudio` object. The fading time can be passed as an argument to the fader methods. If no argument is passed they will use their default value which is `3` seconds. Please be informed that faders do not have callbacks and will not affect play and pause methods on audio object.
+Both fadein and fadeout are separated methods on the `eAudio` object. The fading time can be passed as an argument to the fader methods. If no argument is passed they will use their default value which is `3 seconds`. Please be informed that faders do not have callbacks and will not affect play and pause methods on audio object.
 ```javascript
 audio.fadein(); // 3 seconds by default
 audio.fadein(10); // 10 seconds
-
 audio.fadeout(); // 3 seconds by default
 audio.fadeout(10); // 10 seconds
 ```

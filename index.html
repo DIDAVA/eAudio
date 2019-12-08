@@ -2,17 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="eAudio | Extended HTML Audio Object">
+  <meta name="author" content="DIDAVA Media">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>eAudio Demo</title>
+  <style>
+    .small { font-size: 14px }
+  </style>
 </head>
 <body>
+  <h1>eAudio Demo <a href="https://github.com/DIDAVA/eAudio" class="small">Github</a></h1>
+  <p>Extended HTML Audio Object by <a href="https://www.didava.ir">DIDAVA</a>.</p>
   <div id="container"></div>
 </body>
 <script src="js/eAudio.js"></script>
 <script>
-  const audio = new eAudio('http://45.32.3.178:8232/stream/1');
-  audio.crossOrigin = '*';
+  const audio = new eAudio('your_audio.mp3');
   audio.controls = true;
   audio.autoplay = true;
   document.querySelector('#container').appendChild(audio);
