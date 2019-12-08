@@ -1,3 +1,5 @@
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+
 class eAudio extends Audio {
   constructor(src){
     const eAudioCompatibility = [
@@ -10,7 +12,7 @@ class eAudio extends Audio {
     if (eAudioCompatibility.includes(false)) throw new Error('Incompatible Browser');
 
     super();
-    const actx = new (window.AudioContext || window.webkitAudioContext)();
+    const actx = new AudioContext();
     const source = actx.createMediaElementSource(this);
     const fader = actx.createGain();
     let chain = [source, fader];
