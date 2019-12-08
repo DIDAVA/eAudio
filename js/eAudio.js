@@ -1,5 +1,3 @@
-
-
 class eAudio extends Audio {
   constructor(src){
     const eAudioCompatibility = [
@@ -10,7 +8,7 @@ class eAudio extends Audio {
       typeof BiquadFilterNode === 'function'
     ];
     if (eAudioCompatibility.includes(false)) throw new Error('Incompatible Browser');
-    
+
     super();
     const actx = new (window.AudioContext || window.webkitAudioContext)();
     const source = actx.createMediaElementSource(this);
