@@ -71,28 +71,28 @@ audio.preset = currentSettings; // Set the settings back
 ## Analyser
 `eAudio` supports two kind of analysers (`Frequency Analyse` and `Domain Analyse`). The output of the analyser is an array of numeric values between `0` and `256`. Analyser is customizable by two properties. `specLines` sets the number of output lines and `specSmooth` adjusts the smoothnes of the output lines. The analyser's output array is catchable during the time from two properties `specFreq` and `specDomain`.
 
-### specLines
+#### specLines
 Adjusts the resolution of analyser or in other words sets the output array length. You can set or get the length of the output array. Acceptable values are `16`,`32`,`64`,`128`,`256`,`512` and `1024`. The defaul value is `256`. 
 ```javascript
 const currentLines = audio.specLines; // Gets the current lines count
 audio.specLines = 256; // Sets the output length to 256
 ```
 
-### specSmooth
+#### specSmooth
 Sets or gets the smoothness of the analyser output. The value must between `0` and `1`. The default value is `0.75`.
 ```javascript
 const smoothness = audio.specSmooth; // Gets the current smoothness
 audio.specSmooth = 0.75; // Sets the smoothness to 0.75
 ```
 
-### specFreq
+#### specFreq
 Returns the frequency analysis array for the current moment. Each item in the array is an integer between `0` and `256`.
 ```javascript
 const currentAnalysis = audio.specFreq; // Gets an array of integers for current moment
 ```
 For more information and usage see the FreqSpectrum example.
 
-### specDomain
+#### specDomain
 Returns the domain analysis array for the current moment. Each item in the array is an integer between `0` and `256`.
 ```javascript
 const currentAnalysis = audio.specDomain; // Gets an array of integers for current moment
