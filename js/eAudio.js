@@ -17,7 +17,6 @@ class eAudio extends Audio {
     const fader = actx.createGain();
     let chain = [source, fader];
 
-    this.eq = {};
     const octaves = [31, 63, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
     octaves.forEach( (freq, index) => {
       const filter = actx.createBiquadFilter();
@@ -25,7 +24,8 @@ class eAudio extends Audio {
       else if (index == octaves.length - 1) filter.type = 'highshelf';
       else filter.type = 'peaking';
       filter.frequency.value = freq;
-      Object.defineProperty(this.eq, freq, {
+      const name = `q${freq}`;
+      Object.defineProperty(this, name, {
         enumerable: true,
         get(){ return filter.gain.value },
         set(value){
@@ -44,8 +44,14 @@ class eAudio extends Audio {
     limiter.ratio.value = limiter.ratio.minValue;
     limiter.knee.value = limiter.knee.maxValue;
     const master = actx.createGain();
+    const analyser = actx.createAnalyser();
+    analyser.maxDecibels = 0;
+    analyser.minDecibels = -96;
+    analyser.fftSize = 256;
+    analyser.smoothingTimeConstant = 0.75;
+    const fbc = new Uint8Array(analyser.frequencyBinCount);
 
-    chain.push(limiter, master, actx.destination);
+    chain.push(limiter, master, analyser, actx.destination);
     chain.forEach( (node, index) => { if (index != 0) chain[index-1].connect(node) });
 
     Object.defineProperties(eAudio.prototype, {
@@ -53,6 +59,82 @@ class eAudio extends Audio {
         enumerable: true,
         get(){ return master.gain.value },
         set(value){ master.gain.value = value }
+      },
+      playToggle: {
+        enumerable: true,
+        get(){ return !audio.paused },
+        set(value){
+          if (typeof value === 'boolean') {
+            if (audio.paused) audio.play();
+            else audio.pause();
+          }
+        }
+      },
+      specFFT: {
+        enumerable: true,
+        get(){ return analyser.fftSize },
+        set(value){
+          if ([32,64,128,256,512,1024,2048].includes(value)) {
+            analyser.fftSize = value;
+            fbc = new Uint8Array(analyser.frequencyBinCount);
+          }
+        }
+      },
+      specSmooth: {
+        enumerable: true,
+        get(){ return analyser.smoothingTimeConstant },
+        set(value){ 
+          if (typeof value === 'number' && value >= 0 && value <= 1) 
+            analyser.smoothingTimeConstant = value;
+        }
+      },
+      specFreq: {
+        enumerable: true,
+        get(){
+          analyser.getByteFrequencyData(fbc);
+          return fbc;
+        }
+      },
+      specDomain: {
+        enumerable: true,
+        get(){
+          analyser.getByteTimeDomainData(fbc);
+          return fbc;
+        }
+      },
+      preset: {
+        enumerable: true,
+        get(){ return JSON.stringify({
+          s: this.currentSrc,
+          v: this.volume,
+          0: this.q31,
+          1: this.q63,
+          2: this.q125,
+          3: this.q250,
+          4: this.q500,
+          5: this.q1000,
+          6: this.q2000,
+          7: this.q4000,
+          8: this.q8000,
+          9: this.q16000
+        })},
+        set(json){
+          const obj = JSON.parse(json);
+            if (typeof obj === 'object') {
+            if (typeof obj.s === 'string') this.src = obj.s;
+            if (typeof obj.v === 'number') this.volume = obj.v;
+            if (typeof obj[0] === 'number') this.q31 = obj[0];
+            if (typeof obj[1] === 'number') this.q63 = obj[1];
+            if (typeof obj[2] === 'number') this.q125 = obj[2];
+            if (typeof obj[3] === 'number') this.q250 = obj[3];
+            if (typeof obj[4] === 'number') this.q500 = obj[4];
+            if (typeof obj[5] === 'number') this.q1000 = obj[5];
+            if (typeof obj[6] === 'number') this.q2000 = obj[6];
+            if (typeof obj[7] === 'number') this.q4000 = obj[7];
+            if (typeof obj[8] === 'number') this.q8000 = obj[8];
+            if (typeof obj[9] === 'number') this.q16000 = obj[9];
+          }
+        }
       }
     });
 
@@ -64,6 +146,6 @@ class eAudio extends Audio {
       fader.gain.linearRampToValueAtTime(0.000001, actx.currentTime + time)
     }
 
-    this.src = src;
+    if (src) this.src = src;
   }
 }

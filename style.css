@@ -1,0 +1,25 @@
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+body { 
+  color: #cccccc; 
+  background-color: #222222; 
+  max-width: 960px; 
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+header, main { 
+  padding: 20px 20px; 
+}
+a { 
+  text-decoration: none; 
+  color: #00ccff; 
+}
+.small { 
+  font-size: 14px; 
+}
+audio { 
+  width: 100%; 
+}
