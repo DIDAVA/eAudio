@@ -70,12 +70,12 @@ class eAudio extends Audio {
           }
         }
       },
-      specFFT: {
+      specLines: {
         enumerable: true,
         get(){ return analyser.fftSize },
         set(value){
-          if ([32,64,128,256,512,1024,2048].includes(value)) {
-            analyser.fftSize = value;
+          if ([16,32,64,128,256,512,1024].includes(value)) {
+            analyser.fftSize = value * 2;
             fbc = new Uint8Array(analyser.frequencyBinCount);
           }
         }
