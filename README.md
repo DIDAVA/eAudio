@@ -23,6 +23,7 @@ This project is supposed to keep standard html audio object and add missing feat
   document.querySelector('container').appendChild(audio);
 </script>
 ```
+For more details review the [basic example](https://github.com/DIDAVA/eAudio/blob/master/examples/basic.html).
 
 ## EQ
 `eAudio` comes with 10 band equalizer. The frequency bands are adjusted on standard harmonic octaves (`31Hz`, `63Hz`, `125Hz`, `250Hz`, `500Hz`, `1kHz`, `2kHz`, `4kHz`, `8kHz`, `16kHz`). The gain for each band is limited between `+6db` and `-24db` to prevent output distortion and band converage. The default gain value for each band is `0`.
@@ -38,6 +39,7 @@ audio.q4000 = 0;
 audio.q8000 = 0;
 audio.q16000 = 0;
 ```
+For more details review the [equalizer example](https://github.com/DIDAVA/eAudio/blob/master/examples/equalizer.html).
 
 ## FadeIn / FadeOut
 Both fadein and fadeout are separated methods on the `eAudio` object. The fading time can be passed as an argument to the fader methods. If no argument is passed they will use their default value which is `3 seconds`. Please be informed that faders do not have callbacks and will not affect play and pause methods on audio object.
