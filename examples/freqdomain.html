@@ -41,29 +41,23 @@
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     const ctx = canvas.getContext('2d');
-
-    // Bars and Color
-    const gradient = ctx.createLinearGradient(0, 0, 0, 128);
-    gradient.addColorStop(1, "#00ccff");
-    gradient.addColorStop(0, "#ffffff");
-    ctx.fillStyle = gradient;
+    ctx.fillStyle = "#00ccff";
 
     // Analyser Setup
-    audio.specLines = 128; // Set the spectrum lines count
-    audio.specSmooth = 0.8; // Set the spectrum smoothness
+    audio.specLines = 256; // Set the spectrum lines count
+    audio.specSmooth = 1; // Set the spectrum smoothness
 
-    // Bars Animation
+    // Animation
     function frameLooper() {
       window.requestAnimationFrame(frameLooper);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const data = audio.specFreq; // Get frequency analysis for each frame
-      const maxFreq = parseInt(data.length * 0.725); // Ignore frequencies higher than 16kHz
-      const width = canvas.width / maxFreq;
-      const barWidth = width - 1;
-      for (var i = 0; i < maxFreq; i++) { // Loop through analyser data array
-        const barHeight = canvas.height * (-data[i] / 256) - 1;
-        const barX = i * width;
-        ctx.fillRect(barX, canvas.height, barWidth, barHeight);
+      const data = audio.specDomain; // Get frequency analysis for each frame
+      const middle = canvas.height / 2;
+      const dotWidth = canvas.width / data.length;
+      for (var i = 0; i < data.length; i++) { // Loop through analyser data array
+        const dotHeight = canvas.height * (data[i] / 256);
+        const barX = i * dotWidth;
+        ctx.fillRect(barX, dotHeight, dotWidth, dotWidth);
       }
     }
     frameLooper();
