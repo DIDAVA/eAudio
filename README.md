@@ -6,11 +6,10 @@ This project is supposed to keep standard html audio object and add missing feat
 
 ## Features
 * 10 Band Equalizer
-* FadeIn
-* FadeOut
-* PlayToggle
-* Preset
+* FadeIn / FadeOut
 * Audio Analyser
+* Preset
+* PlayToggle
 
 ## Basic Setup
 `eAudio` setup and functionality is the same as standard html audio object: 
@@ -41,6 +40,7 @@ audio.q16000 = 0;
 ```
 For more details review the [equalizer example](https://github.com/DIDAVA/eAudio/blob/master/examples/equalizer.html).
 
+
 ## FadeIn / FadeOut
 Both fadein and fadeout are separated methods on the `eAudio` object. The fading time can be passed as an argument to the fader methods. If no argument is passed they will use their default value which is `3 seconds`. Please be informed that faders do not have callbacks and will not affect play and pause methods on audio object.
 ```javascript
@@ -50,25 +50,6 @@ audio.fadeout(); // 3 seconds by default
 audio.fadeout(10); // 10 seconds
 ```
 
-## PlayToggle
-You can play/pause audio more easily by playToggle property:
-```javascript
-audio.playToggle = true; // Plays the audio
-audio.playToggle = false; // Pauses the audio
-
-// Toggle playback by clicking a button
-document.querySelector('button').addEventListener('click', e => {
-  audio.playToggle = !audio.playToggle; // Toggles play/pause
-});
-```
-
-## Preset
-This property can set or get the current `source`, `equalizer` and `volume` settings as an json string. It is useful to save your current settings to database or file and simply set all the settings very fast.
-```javascript
-const currentSettings = audio.preset; // Get the json settings string
-
-audio.preset = currentSettings; // Set the settings back
-```
 
 ## Analyser
 `eAudio` supports two kind of analysers (`Frequency Analyse` and `Domain Analyse`). The output of the analyser is an array of numeric values between `0` and `256`. Analyser is customizable by two properties. `specLines` sets the number of output lines and `specSmooth` adjusts the smoothnes of the output lines. The analyser's output array is catchable during the time from two properties `specFreq` and `specDomain`.
@@ -100,3 +81,25 @@ Returns the domain analysis array for the current moment. Each item in the array
 const currentAnalysis = audio.specDomain; // Gets an array of integers for current moment
 ```
 For more information and usage see the DomainSpectrum example.
+
+
+## PlayToggle
+You can play/pause audio more easily by playToggle property:
+```javascript
+audio.playToggle = true; // Plays the audio
+audio.playToggle = false; // Pauses the audio
+
+// Toggle playback by clicking a button
+document.querySelector('button').addEventListener('click', e => {
+  audio.playToggle = !audio.playToggle; // Toggles play/pause
+});
+```
+
+
+## Preset
+This property can set or get the current `source`, `equalizer` and `volume` settings as an json string. It is useful to save your current settings to database or file and simply set all the settings very fast.
+```javascript
+const currentSettings = audio.preset; // Get the json settings string
+
+audio.preset = currentSettings; // Set the settings back
+```

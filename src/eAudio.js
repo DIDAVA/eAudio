@@ -36,8 +36,7 @@ class eAudio extends Audio {
       });
       chain.push(filter);
     });
-    
-    const master = actx.createGain();
+
     const analyser = actx.createAnalyser();
     analyser.maxDecibels = 0;
     analyser.minDecibels = -96;
@@ -45,15 +44,10 @@ class eAudio extends Audio {
     analyser.smoothingTimeConstant = 0.75;
     const fbc = new Uint8Array(analyser.frequencyBinCount);
 
-    chain.push(master, analyser, actx.destination);
+    chain.push(analyser, actx.destination);
     chain.forEach( (node, index) => { if (index != 0) chain[index-1].connect(node) });
 
     Object.defineProperties(eAudio.prototype, {
-      volume: {
-        enumerable: true,
-        get(){ return master.gain.value },
-        set(value){ master.gain.value = value }
-      },
       playToggle: {
         enumerable: true,
         get(){ return !audio.paused },
