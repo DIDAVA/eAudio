@@ -15,18 +15,24 @@
     <p>Extended HTML Audio Object by <a href="https://www.didava.ir">DIDAVA</a>.</p>
   </header>
   <main>
+    <button id="start">Start</button>
     <div id="container"></div>
   </main>
 </body>
 <script src="../src/eAudio.js"></script>
 <script>
-  // eAudio Setup
-  const audio = new eAudio('http://45.32.3.178:8232/stream/1'); // Antena1 Live Radio Stream
-  audio.crossOrigin = '*';
-  audio.autoplay = true;
-  audio.controls = true;
-  document.querySelector('#container').appendChild(audio);
+  const start = document.querySelector('#start');
+  start.addEventListener('click', e => {
+    start.remove();
+    
+    // eAudio Setup
+    const audio = new eAudio('http://45.32.3.178:8232/stream/1'); // Antena1 Live Radio Stream
+    audio.crossOrigin = '*';
+    audio.autoplay = true;
+    audio.controls = true;
+    document.querySelector('#container').appendChild(audio);
 
-  console.dir(audio);
+    console.dir(audio);
+  });
 </script>
 </html>

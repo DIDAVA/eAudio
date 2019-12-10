@@ -24,6 +24,20 @@ a {
 .small { 
   font-size: 14px; 
 }
+button {
+  background-color: #444;
+  color: var(--mainColor);
+  border: 1px solid var(--mainColor);
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+#start {
+  width: 100%;
+}
 audio { 
   width: 100%; 
 }
