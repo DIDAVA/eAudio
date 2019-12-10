@@ -73,14 +73,14 @@ Returns the frequency analysis array for the current moment. Each item in the ar
 ```javascript
 const currentAnalysis = audio.specFreq; // Gets an array of integers for current moment
 ```
-For more information and usage see the FreqSpectrum example.
+For more information and usage see the [spectrum example](https://github.com/DIDAVA/eAudio/blob/master/examples/freqspectrum.html).
 
 #### specDomain
 Returns the domain analysis array for the current moment. Each item in the array is an integer between `0` and `256`.
 ```javascript
 const currentAnalysis = audio.specDomain; // Gets an array of integers for current moment
 ```
-For more information and usage see the DomainSpectrum example.
+For more information and usage see the [domain example](https://github.com/DIDAVA/eAudio/blob/master/examples/freqdomain.html).
 
 
 ## PlayToggle
