@@ -40,12 +40,14 @@
       let label = document.createElement('label');
       let span = document.createElement('span');
       let input = document.createElement('input');
+
       span.innerText = eqBand.replace('q', '').replace('000', 'k') + 'Hz';
       input.type = 'number';
       input.min = -24;
       input.max = 6;
       input.value = 0;
       input.oninput = e => audio[eqBand] = e.target.value;
+      
       label.appendChild(span);
       label.appendChild(input);
       document.querySelector('#equalizer').appendChild(label);

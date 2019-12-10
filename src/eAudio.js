@@ -38,11 +38,11 @@ class eAudio extends Audio {
     });
 
     const analyser = actx.createAnalyser();
-    analyser.maxDecibels = 0;
+    analyser.maxDecibels = -9;
     analyser.minDecibels = -96;
-    analyser.fftSize = 256;
+    analyser.fftSize = 128;
     analyser.smoothingTimeConstant = 0.75;
-    const fbc = new Uint8Array(analyser.frequencyBinCount);
+    let fbc = new Uint8Array(analyser.frequencyBinCount);
 
     chain.push(analyser, actx.destination);
     chain.forEach( (node, index) => { if (index != 0) chain[index-1].connect(node) });

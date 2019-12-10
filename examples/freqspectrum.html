@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="eAudio | Extended HTML Audio Object">
+  <meta name="author" content="DIDAVA Media">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>eAudio Demo | DIDAVA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>eAudio Spectrum Demo <a href="https://github.com/DIDAVA/eAudio" class="small">Github</a></h1>
+    <p>Extended HTML Audio Object by <a href="https://www.didava.ir">DIDAVA</a>.</p>
+  </header>
+  <main>
+    <button id="start">Start</button>
+    <div id="container"></div>
+    <div id="spectrum"></div>
+  </main>
+</body>
+<script src="../src/eAudio.js"></script>
+<script>
+  const start = document.querySelector('#start');
+  start.addEventListener('click', e => {
+    start.remove(); // Remove start button
+    
+    // eAudio Setup
+    const audio = new eAudio('http://45.32.3.178:8232/stream/1'); // Antena1 Live Radio Stream
+    audio.crossOrigin = '*';
+    audio.autoplay = true;
+    audio.controls = true;
+    document.querySelector('#container').appendChild(audio);
+
+    // Spectrum Canvas Setup
+    const canvas = document.createElement('canvas');
+    document.querySelector('#spectrum').appendChild(canvas);
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    const ctx = canvas.getContext('2d');
+
+    // Bars and Color
+    const gradient = ctx.createLinearGradient(0, 0, 0, 128);
+    gradient.addColorStop(1, "#00ccff");
+    gradient.addColorStop(0, "#ffffff");
+    ctx.fillStyle = gradient;
+
+    // Analyser Setup
+    audio.specLines = 128; // Set the spectrum lines count
+    audio.specSmooth = 0.8; // Set the spectrum smoothness
+
+    // Bars Animation
+    function frameLooper() {
+      window.requestAnimationFrame(frameLooper);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const data = audio.specFreq; // Get frequency analysis for each frame
+      const maxFreq = parseInt(data.length * 0.725); // Ignore frequencies higher than 16kHz
+      for (var i = 0; i < maxFreq; i++) { // Loop through analyser data array
+        const width = canvas.width / maxFreq;
+        const barWidth = width - 1;
+        const barHeight = canvas.height * (-data[i] / 256) - 1;
+        const barX = i * width;
+        ctx.fillRect(barX, canvas.height, barWidth, barHeight);
+      }
+    }
+    frameLooper();
+
+    console.dir(audio);
+  });
+</script>
+</html>
