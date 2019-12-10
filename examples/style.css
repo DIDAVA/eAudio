@@ -1,3 +1,7 @@
+:root {
+  --bgColor: #222222;
+  --mainColor: #00ccff;
+}
 * { 
   margin: 0; 
   padding: 0; 
@@ -5,7 +9,7 @@
 }
 body { 
   color: #cccccc; 
-  background-color: #222222; 
+  background-color: var(--bgColor); 
   max-width: 960px; 
   margin: 0 auto;
   font-family: sans-serif;
@@ -15,11 +19,37 @@ header, main {
 }
 a { 
   text-decoration: none; 
-  color: #00ccff; 
+  color: var(--mainColor); 
 }
 .small { 
   font-size: 14px; 
 }
 audio { 
   width: 100%; 
+}
+#equalizer {
+  margin: 10px 0;
+}
+label {
+  display: flex;
+  align-items: center;
+  color: var(--mainColor);
+  font-weight: bold;
+  padding: 5px 0;
+}
+label span {
+  width: 50px;
+}
+input[type="number"] {
+  color: #00ccff;
+  background-color: inherit;
+  font-size: inherit;
+  font-weight: bold;
+  width: 60px;
+  font-family: inherit;
+  padding: 5px;
+  margin: 0 10px;
+  border: 1px solid var(--mainColor);
+  border-radius: 3px;
+  outline: none;
 }

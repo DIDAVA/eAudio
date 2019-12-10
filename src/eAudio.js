@@ -36,13 +36,7 @@ class eAudio extends Audio {
       });
       chain.push(filter);
     });
-
-    const limiter = actx.createDynamicsCompressor();
-    limiter.attack.value = limiter.attack.maxValue;
-    limiter.release.value = limiter.release.maxValue;
-    limiter.threshold.value = limiter.threshold.maxValue;
-    limiter.ratio.value = limiter.ratio.minValue;
-    limiter.knee.value = limiter.knee.maxValue;
+    
     const master = actx.createGain();
     const analyser = actx.createAnalyser();
     analyser.maxDecibels = 0;
@@ -51,7 +45,7 @@ class eAudio extends Audio {
     analyser.smoothingTimeConstant = 0.75;
     const fbc = new Uint8Array(analyser.frequencyBinCount);
 
-    chain.push(limiter, master, analyser, actx.destination);
+    chain.push(master, analyser, actx.destination);
     chain.forEach( (node, index) => { if (index != 0) chain[index-1].connect(node) });
 
     Object.defineProperties(eAudio.prototype, {
