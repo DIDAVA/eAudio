@@ -8,8 +8,9 @@ This project is supposed to keep standard html audio object and add missing feat
 * 10 Band Equalizer
 * FadeIn / FadeOut
 * Audio Analyser
-* Preset
 * PlayToggle
+* Formatted Time
+* Preset
 
 ## Basic Setup
 `eAudio` setup and functionality is the same as standard html audio object: 
@@ -40,7 +41,6 @@ audio.q16000 = 0;
 ```
 For more details review the [equalizer example](https://github.com/DIDAVA/eAudio/blob/master/examples/equalizer.html).
 
-
 ## FadeIn / FadeOut
 Both fadein and fadeout are separated methods on the `eAudio` object. The fading time can be passed as an argument to the fader methods. If no argument is passed they will use their default value which is `3 seconds`. Please be informed that faders do not have callbacks and will not affect play and pause methods on audio object.
 ```javascript
@@ -49,7 +49,6 @@ audio.fadein(10); // 10 seconds
 audio.fadeout(); // 3 seconds by default
 audio.fadeout(10); // 10 seconds
 ```
-
 
 ## Analyser
 `eAudio` supports two kind of analysers (`Frequency Analyse` and `Domain Analyse`). The output of the analyser is an array of numeric values between `0` and `256`. Analyser is customizable by two properties. `specLines` sets the number of output lines and `specSmooth` adjusts the smoothnes of the output lines. The analyser's output array is catchable during the time from two properties `specFreq` and `specDomain`.
@@ -82,7 +81,6 @@ const currentAnalysis = audio.specDomain; // Gets an array of integers for curre
 ```
 For more information and usage see the [domain example](https://github.com/DIDAVA/eAudio/blob/master/examples/freqdomain.html).
 
-
 ## PlayToggle
 You can play/pause audio more easily by playToggle property:
 ```javascript
@@ -95,6 +93,17 @@ document.querySelector('button').addEventListener('click', e => {
 });
 ```
 
+## Formatted Time
+This property stringifies the current audio time to `hh:mm:ss` format.
+```html
+<div id="timer">00:00:00</div>
+<script>
+const timer = document.querySelector('#timer');
+setInterval( () => {
+  timer.innerText = audio.formattedTime;
+}, 1000);
+</script>
+```
 
 ## Preset
 This property can set or get the current `source`, `equalizer` and `volume` settings as an json string. It is useful to save your current settings to database or file and simply set all the settings very fast.

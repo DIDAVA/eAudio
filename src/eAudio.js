@@ -90,6 +90,17 @@ class eAudio extends Audio {
           return fbc;
         }
       },
+      formattedTime: {
+        enumerable: true,
+        get(){
+          const pad = (num, size) => { return ('000' + num).slice(size * -1) },
+          time = this.currentTime,
+          hours = Math.floor(time / 3600),
+          minutes = Math.floor(time / 60) % 60,
+          seconds = Math.floor(time - minutes * 60);
+          return `${pad(hours, 2)}:${pad(minutes, 2)}:${pad(seconds, 2)}`;
+        }
+      },
       preset: {
         enumerable: true,
         get(){ return JSON.stringify({
