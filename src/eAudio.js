@@ -1,3 +1,11 @@
+/*!
+ * eAudio.js v1.0.0
+ * (c) 2019 DIDAVA Media
+ * Released under the MIT License.
+ * https://www.didava.ir
+ * https://github.com/DIDAVA/eAudio
+ */
+
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 
 class eAudio extends Audio {
@@ -119,7 +127,7 @@ class eAudio extends Audio {
         })},
         set(json){
           const obj = JSON.parse(json);
-            if (typeof obj === 'object') {
+          if (typeof obj === 'object') {
             if (typeof obj.s === 'string') this.src = obj.s;
             if (typeof obj.v === 'number') this.volume = obj.v;
             if (typeof obj[0] === 'number') this.q31 = obj[0];
