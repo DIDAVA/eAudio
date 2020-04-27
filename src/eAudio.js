@@ -1,5 +1,5 @@
 /*!
- * eAudio.js v1.0.0
+ * eAudio.js v1.0.1
  * (c) 2019 DIDAVA Media
  * Released under the MIT License.
  * https://www.didava.ir
@@ -58,11 +58,11 @@ class eAudio extends Audio {
     Object.defineProperties(eAudio.prototype, {
       playToggle: {
         enumerable: true,
-        get(){ return !audio.paused },
+        get(){ return !this.paused },
         set(value){
           if (typeof value === 'boolean') {
-            if (audio.paused) audio.play();
-            else audio.pause();
+            if (this.paused) this.play();
+            else this.pause();
           }
         }
       },
